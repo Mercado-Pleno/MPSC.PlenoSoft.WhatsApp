@@ -9,7 +9,8 @@
 				var phone = document.getElementById("phone");
 				var link = document.getElementById("link");
 				var fullNumber = ddi.value.trim() + ddd.value.trim() + phone.value.replace(" ", "").replace("-", "");
-				link.href = "https://api.whatsapp.com/send?phone=" + fullNumber + "&text=Mensagem";
+				var mensagem = "https://bruno-n-fernandes.github.io/MPSC.PlenoSoft.WhatsApp/";
+				link.href = "https://api.whatsapp.com/send?phone=" + fullNumber + "&text=" + mensagem;
 			}
 		</script>
 	</head>
