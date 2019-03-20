@@ -1,14 +1,26 @@
 <html>
     <head>
         <title>WhatsApp</title>
+        <script type="text/javascript">
+            function changeLink() {
+                var ddi = document.getElementById("ddi");
+                var ddd = document.getElementById("ddd");
+                var phone = document.getElementById("phone");
+                var link = document.getElementById("link");
+                link.href = "https://api.whatsapp.com/send?phone=" + ddi.value + ddd.value + phone.value + "&text=Mensagem"
+            }
+        </script>
     </head>
     <body>
-        Hello WhatsApp
-        <input type="hidden" id="url" name="url" value="https://api.whatsapp.com/send?phone={}&text=Mensagem" />
+        <label for="ddi">DDI</label>
+        <input type="text" id="ddi" name="ddi" value="55" />
+        <br />
         <label for="ddd">DDD</label>
         <input type="text" id="ddd" name="ddd" />
         <br />
         <label for="phone">Telefone</label>
         <input type="text" id="phone" name="phone" />
+        <br />
+        <a id="link" name="link" >Enviar Mensagem para o Número</a>
     </body>
 </html>
