@@ -3,14 +3,16 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>WhatsApp</title>
 		<script type="text/javascript">
+			const ddi = document.getElementById("ddi");
+			const ddd = document.getElementById("ddd");
+			const phone = document.getElementById("phone");
+			const link = document.getElementById("link");
+
 			function changeLink() {
-				var ddi = document.getElementById("ddi");
-				var ddd = document.getElementById("ddd");
-				var phone = document.getElementById("phone");
-				var link = document.getElementById("link");
-				var fullNumber = ddi.value.trim() + ddd.value.trim() + phone.value.replace(" ", "").replace("-", "");
-				var mensagem = "https://bruno-n-fernandes.github.io/MPSC.PlenoSoft.WhatsApp/";
+				let fullNumber = ddi.value.trim() + ddd.value.trim() + phone.value.replace(" ", "").replace("-", "");
+				let mensagem = "https://bruno-n-fernandes.github.io/MPSC.PlenoSoft.WhatsApp/";
 				link.href = "https://api.whatsapp.com/send?phone=" + fullNumber + "&text=" + mensagem;
+				link.text = "Enviar Mensagem para " + fullNumber;
 			}
 		</script>
 	</head>
