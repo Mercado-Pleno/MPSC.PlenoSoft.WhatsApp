@@ -6,15 +6,15 @@
 	<body>
 		<div align="center">
 			<h2>Envie uma mensagem para o seu próprio número do WhatsApp</h2>
-			<label for="ddi" style="width: 70px; text-align: right; display: inline-block;">Seu DDI: </label>
+			<label for="ddi" style="width: 100px; text-align: right; display: inline-block;">Seu DDI: </label>
 			<input type="text" id="ddi" name="ddi" value="55" onchange="changeLink()" style="width: 30px;" maxlength="2" />
 			<span style="width: 86px; text-align: right; display: inline-block;" ></span>
 			<br />
-			<label for="ddd" style="width: 70px; text-align: right; display: inline-block;">Seu DDD: </label>
+			<label for="ddd" style="width: 100px; text-align: right; display: inline-block;">Seu DDD: </label>
 			<input type="text" id="ddd" name="ddd" value="21" onchange="changeLink()" style="width: 30px;" maxlength="2" />
 			<span style="width: 86px; text-align: right; display: inline-block;" ></span>
 			<br />
-			<label for="phone" style="width: 70px; text-align: right; display: inline-block;">Seu Telefone: </label>
+			<label for="phone" style="width: 100px; text-align: right; display: inline-block;">Seu Telefone: </label>
 			<input type="text" id="phone" name="phone" value="" onchange="changeLink()" style="width: 120px;" maxlength="11" />
 			<br />
 			<a id="link" name="link" target="WhatsApp">Enviar Mensagem</a>
@@ -44,7 +44,7 @@
 				let fullPhone = `+${ddi} (${ddd}) ${phone}`;
 				let fullNumber = ddi + ddd + number;
 				
-				link.href = "https://api.whatsapp.com/send?phone=" + fullNumber + "&text=" + mensagem;
+				link.href = `https://api.whatsapp.com/send?phone=${fullNumber}&text=${mensagem}`;
 				link.text = `Enviar Mensagem para ${fullPhone}`;
 			}
 			
