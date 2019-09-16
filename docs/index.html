@@ -2,19 +2,6 @@
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>WhatsApp</title>
-		<script type="text/javascript">
-			const ddi = document.getElementById("ddi");
-			const ddd = document.getElementById("ddd");
-			const phone = document.getElementById("phone");
-			const link = document.getElementById("link");
-
-			function changeLink() {
-				let fullNumber = ddi.value.trim() + ddd.value.trim() + phone.value.replace(" ", "").replace("-", "");
-				let mensagem = "https://bruno-n-fernandes.github.io/MPSC.PlenoSoft.WhatsApp/";
-				link.href = "https://api.whatsapp.com/send?phone=" + fullNumber + "&text=" + mensagem;
-				link.text = "Enviar Mensagem para " + fullNumber;
-			}
-		</script>
 	</head>
 	<body>
 		<div align="center">
@@ -32,6 +19,19 @@
 			<br />
 			<a id="link" name="link" target="WhatsApp">Enviar Mensagem</a>
 		</div>
-		<script type="text/javascript">changeLink()</script>
+		<script type="text/javascript">
+			const ddi = document.getElementById("ddi");
+			const ddd = document.getElementById("ddd");
+			const phone = document.getElementById("phone");
+			const link = document.getElementById("link");
+
+			function changeLink() {
+				let fullNumber = ddi.value.trim() + ddd.value.trim() + phone.value.replace(" ", "").replace("-", "");
+				let mensagem = "https://bruno-n-fernandes.github.io/MPSC.PlenoSoft.WhatsApp/";
+				link.href = "https://api.whatsapp.com/send?phone=" + fullNumber + "&text=" + mensagem;
+				link.text = "Enviar Mensagem para " + fullNumber;
+			}
+			changeLink();
+		</script>
 	</body>
 </html>
