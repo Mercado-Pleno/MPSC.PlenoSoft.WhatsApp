@@ -41,10 +41,11 @@
 				let ddd = txtddd.value.trim();
 				let number = txtphone.value.replace(" ", "").replace("-", "");
 				let phone = insert(insert(number, "-", 5), " ", 1);
+				let fullPhone = `+${ddi} (${ddd}) ${phone}`;
 				let fullNumber = ddi + ddd + number;
 				
 				link.href = "https://api.whatsapp.com/send?phone=" + fullNumber + "&text=" + mensagem;
-				link.text = `Enviar Mensagem para +${ddi} (${ddd}) ${phone}`;
+				link.text = `Enviar Mensagem para ${fullPhone}`;
 			}
 			
 			changeLink();
