@@ -20,17 +20,33 @@
 			<a id="link" name="link" target="WhatsApp">Enviar Mensagem</a>
 		</div>
 		<script type="text/javascript">
-			const ddi = document.getElementById("ddi");
-			const ddd = document.getElementById("ddd");
-			const phone = document.getElementById("phone");
+			const mensagem = "https://bruno-n-fernandes.github.io/MPSC.PlenoSoft.WhatsApp/";
+			const txtddi = document.getElementById("ddi");
+			const txtddd = document.getElementById("ddd");
+			const txtphone = document.getElementById("phone");
 			const link = document.getElementById("link");
 
-			function changeLink() {
-				let fullNumber = ddi.value.trim() + ddd.value.trim() + phone.value.replace(" ", "").replace("-", "");
-				let mensagem = "https://bruno-n-fernandes.github.io/MPSC.PlenoSoft.WhatsApp/";
-				link.href = "https://api.whatsapp.com/send?phone=" + fullNumber + "&text=" + mensagem;
-				link.text = `Enviar Mensagem para +${ddi.value.trim()} (${ddd.value.trim()}) ${phone.value.replace(' ', '').replace('-', '')}`;
+			const insert = function insert(main_string, ins_string, pos) {
+				if(typeof(pos) == "undefined") {
+					pos = 0;
+				}
+				if(typeof(ins_string) == "undefined") {
+					ins_string = '';
+				}
+				return main_string.slice(0, pos) + ins_string + main_string.slice(pos);
 			}
+			
+			function changeLink() {
+				let ddi = txtddi.value.trim();
+				let ddd = txtddd.value.trim();
+				let number = txtphone.value.replace(" ", "").replace("-", "");
+				let phone = insert(insert(number, "-", 5), " ", 1);
+				let fullNumber = ddi + ddd + number;
+				
+				link.href = "https://api.whatsapp.com/send?phone=" + fullNumber + "&text=" + mensagem;
+				link.text = `Enviar Mensagem para +${ddi} (${ddd}) ${phone}`;
+			}
+			
 			changeLink();
 		</script>
 	</body>
