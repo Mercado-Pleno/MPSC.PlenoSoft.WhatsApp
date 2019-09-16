@@ -29,7 +29,7 @@
 				let fullNumber = ddi.value.trim() + ddd.value.trim() + phone.value.replace(" ", "").replace("-", "");
 				let mensagem = "https://bruno-n-fernandes.github.io/MPSC.PlenoSoft.WhatsApp/";
 				link.href = "https://api.whatsapp.com/send?phone=" + fullNumber + "&text=" + mensagem;
-				link.text = "Enviar Mensagem para " + fullNumber;
+				link.text = "Enviar Mensagem para +${ddi.value.trim()} (${ddd.value.trim()}) ${phone.value.replace(" ", "").replace("-", "")}";
 			}
 			changeLink();
 		</script>
