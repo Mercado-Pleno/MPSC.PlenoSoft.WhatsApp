@@ -20,18 +20,18 @@
 			</span>
 			<br />
 			<br />
-			<label for="ddi" style="width: 50px; text-align: left; display: inline-block;">DDI: </label>
-			<label for="ddd" style="width: 50px; text-align: left; display: inline-block;">DDD: </label>
-			<label for="phone" style="width: 148px; text-align: left; display: inline-block;">Telefone: </label>
+			<label for="ddi" style="width: 48px; text-align: left; display: inline-block;">DDI: </label>
+			<label for="ddd" style="width: 48px; text-align: left; display: inline-block;">DDD: </label>
+			<label for="phone" style="width: 154px; text-align: left; display: inline-block;">Telefone: </label>
 			<br />
-			<input type="text" id="ddi" name="ddi" value="55" onchange="changeLink()" style="width: 42px;" maxlength="2" />
-			<input type="text" id="ddd" name="ddd" value="21" onchange="changeLink()" style="width: 42px;" maxlength="2" />
-			<input type="text" id="phone" name="phone" value="" onchange="changeLink()" style="width: 140px;" maxlength="20" />
+			<input type="text" id="ddi" name="ddi" value="55" onchange="changeLink()" style="width: 48px;" maxlength="2" />
+			<input type="text" id="ddd" name="ddd" value="21" onchange="changeLink()" style="width: 48px;" maxlength="2" />
+			<input type="text" id="phone" name="phone" value="" onchange="changeLink()" style="width: 154px;" maxlength="20" />
 			<br />
 			<br />
 			<label for="msg" style="width: 250px; text-align: left; display: inline-block;">Mensagem: </label>
 			<br />
-			<textarea type="text" id="msg" name="msg" onkeyup="changeLink()" style="width: 250px;" rows="8">https://bruno-n-fernandes.github.io/MPSC.PlenoSoft.WhatsApp</textarea>
+			<textarea type="text" id="msg" name="msg" onkeyup="changeLink()" style="width: 256px;" rows="8">https://bruno-n-fernandes.github.io/MPSC.PlenoSoft.WhatsApp</textarea>
 			<br />
 			<br />
 			Enviar Mensagem para<br />
@@ -55,10 +55,10 @@
 			const qrCode = document.getElementById("qrCode");
 
 			const insert = function insert(main_string, ins_string, pos) {
-				if (typeof (pos) == "undefined") {
+				if (typeof(pos) == "undefined") {
 					pos = 0;
 				}
-				if (typeof (ins_string) == "undefined") {
+				if (typeof(ins_string) == "undefined") {
 					ins_string = '';
 				}
 				return main_string.slice(0, pos) + ins_string + main_string.slice(pos);
@@ -79,10 +79,14 @@
 					number = number.substring(2);
 				}
 
+				let phone = insert(number, "-", -4);
+				if (number.length == 9) {
+					phone = insert(phone, " ", 1);
+				}
+
 				let mensagem = encodeURIComponent(txtmsg.value.trim());
 				let ddi = txtddi.value.trim();
 				let ddd = txtddd.value.trim();
-				let phone = insert(insert(number, "-", 5), " ", 1);
 				let fullPhone = `+${ddi} (${ddd}) ${phone}`;
 				let fullNumber = ddi + ddd + number;
 				txtphone.value = phone;
