@@ -1,9 +1,8 @@
-<!DOCTYPE html>
 <html>
 	<head>
 		<title>WhatsApp Self Link Generator</title>
 		<meta name="description" content="Gerador de link para enviar mensagem para você mesmo">
-		<meta name="keywords" content="WhatsApp Self Link Generator Gerador Zap">
+		<meta name="keywords" content="WhatsApp Self Link Generator Gerador Zap Whats App WA">
 		<meta name="robots" content="">
 		<meta name="revisit-after" content="1 month">
 		<meta name="language" content="Portuguese">
@@ -13,52 +12,88 @@
 	</head>
 	<body style="background-color: rgb(226, 238, 224)">
 		<div align="center">
-			<h1>WhatsApp</h1>
-			<h2>Envie uma mensagem para o seu próprio número!</h2>
-			<label for="ddi" style="width: 100px; text-align: right; display: inline-block;">Seu DDI: </label>
-			<input type="text" id="ddi" name="ddi" value="55" onchange="changeLink()" style="width: 30px;" maxlength="2" />
-			<span style="width: 86px; text-align: right; display: inline-block;" ></span>
+			<span style="width: 256px; text-align: center; display: inline-block;">
+				<h1>WhatsApp</h1>
+				Envie mensagens para qualquer número do Whats App, inclusive para o seu próprio número!
+				<br /><br />
+				E o melhor, você não precisa que o número esteja em sua agenda!
+			</span>
 			<br />
-			<label for="ddd" style="width: 100px; text-align: right; display: inline-block;">Seu DDD: </label>
-			<input type="text" id="ddd" name="ddd" value="21" onchange="changeLink()" style="width: 30px;" maxlength="2" />
-			<span style="width: 86px; text-align: right; display: inline-block;" ></span>
 			<br />
-			<label for="phone" style="width: 100px; text-align: right; display: inline-block;">Seu Telefone: </label>
-			<input type="text" id="phone" name="phone" value="" onchange="changeLink()" style="width: 120px;" maxlength="11" />
+			<label for="ddi" style="width: 50px; text-align: left; display: inline-block;">DDI: </label>
+			<label for="ddd" style="width: 50px; text-align: left; display: inline-block;">DDD: </label>
+			<label for="phone" style="width: 148px; text-align: left; display: inline-block;">Telefone: </label>
 			<br />
-			<a id="link" name="link" target="WhatsApp">Enviar Mensagem</a>
+			<input type="text" id="ddi" name="ddi" value="55" onchange="changeLink()" style="width: 42px;" maxlength="2" />
+			<input type="text" id="ddd" name="ddd" value="21" onchange="changeLink()" style="width: 42px;" maxlength="2" />
+			<input type="text" id="phone" name="phone" value="" onchange="changeLink()" style="width: 140px;" maxlength="20" />
+			<br />
+			<br />
+			<label for="msg" style="width: 250px; text-align: left; display: inline-block;">Mensagem: </label>
+			<br />
+			<textarea type="text" id="msg" name="msg" onkeyup="changeLink()" style="width: 250px;" rows="8">https://bruno-n-fernandes.github.io/MPSC.PlenoSoft.WhatsApp/</textarea>
+			<br />
+			<br />
+			Enviar Mensagem para<br />
+			<a id="link" name="link" target="WhatsApp">
+				<span for="qrCode" id="lbLink" name="lbLink"></span>
+				<br />
+				<img id="qrCode" name="qrCode" width="256" height="256" src="https://avatars.githubusercontent.com/u/1778880?v=4" />
+			</a>
+			<br />
 			<h3>Projeto hospedado no <a href="https://github.com/Bruno-N-Fernandes/MPSC.PlenoSoft.WhatsApp">Git Hub</a></h3>
 			<h4>Desenvolvido por <a href="https://instagram.com/HipnoseDivertida">@HipnoseDivertida</a></h4>
 		</div>
 		<script type="text/javascript">
-			const mensagem = "https://bruno-n-fernandes.github.io/MPSC.PlenoSoft.WhatsApp/";
+
 			const txtddi = document.getElementById("ddi");
 			const txtddd = document.getElementById("ddd");
 			const txtphone = document.getElementById("phone");
+			const txtmsg = document.getElementById("msg");
 			const link = document.getElementById("link");
+			const lbLink = document.getElementById("lbLink");
+			const qrCode = document.getElementById("qrCode");
 
 			const insert = function insert(main_string, ins_string, pos) {
-				if(typeof(pos) == "undefined") {
+				if (typeof (pos) == "undefined") {
 					pos = 0;
 				}
-				if(typeof(ins_string) == "undefined") {
+				if (typeof (ins_string) == "undefined") {
 					ins_string = '';
 				}
 				return main_string.slice(0, pos) + ins_string + main_string.slice(pos);
 			}
-			
+
 			function changeLink() {
+				let number = txtphone.value.replace(/[^0-9]/gi, "");
+
+				if (number.length == 0) return;
+
+				if (number.length >= 12) {
+					txtddi.value = number.substring(0, 2);
+					number = number.substring(2);
+				}
+
+				if (number.length >= 10) {
+					txtddd.value = number.substring(0, 2);
+					number = number.substring(2);
+				}
+
+				let mensagem = encodeURIComponent(txtmsg.value.trim());
 				let ddi = txtddi.value.trim();
 				let ddd = txtddd.value.trim();
-				let number = txtphone.value.replace(" ", "").replace("-", "");
 				let phone = insert(insert(number, "-", 5), " ", 1);
 				let fullPhone = `+${ddi} (${ddd}) ${phone}`;
 				let fullNumber = ddi + ddd + number;
-				
-				link.href = `https://api.whatsapp.com/send?phone=${fullNumber}&text=${mensagem}`;
-				link.text = `Enviar Mensagem para ${fullPhone}`;
+				txtphone.value = phone;
+
+				let waUrl = `https://api.whatsapp.com/send?phone=${fullNumber}&text=${mensagem}`;
+				link.href = waUrl;
+				lbLink.innerText = fullPhone;
+
+				qrCode.src = `https://api.qrserver.com/v1/create-qr-code/?size=256x256&data=${encodeURIComponent(waUrl)}`;
 			}
-			
+
 			changeLink();
 		</script>
 	</body>
