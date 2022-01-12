@@ -13,32 +13,33 @@
 	<body style="background-color: rgb(226, 238, 224)">
 		<div align="center">
 			<span style="width: 256px; text-align: center; display: inline-block;">
-				<h1>WhatsApp</h1>
+				<h2>Whats App Sender</h2>
 				Envie mensagens para qualquer número do Whats App, inclusive para o seu próprio número!
-				<br /><br />
+					<br />
+				<br />
 				E o melhor, você não precisa que o número esteja em sua agenda!
 			</span>
 			<br />
 			<br />
-			<label for="ddi" style="width: 48px; text-align: left; display: inline-block;">DDI: </label>
-			<label for="ddd" style="width: 48px; text-align: left; display: inline-block;">DDD: </label>
-			<label for="phone" style="width: 154px; text-align: left; display: inline-block;">Telefone: </label>
+			<label for="ddi" style="width: 48px; text-align: left; display: inline-block;">DDI:</label>
+			<label for="ddd" style="width: 48px; text-align: left; display: inline-block;">DDD:</label>
+			<label for="phone" style="width: 154px; text-align: left; display: inline-block;">Celular:</label>
 			<br />
-			<input type="text" id="ddi" name="ddi" value="55" onchange="changeLink()" style="width: 48px;" maxlength="2" />
-			<input type="text" id="ddd" name="ddd" value="21" onchange="changeLink()" style="width: 48px;" maxlength="2" />
-			<input type="text" id="phone" name="phone" value="" onchange="changeLink()" style="width: 154px;" maxlength="20" />
+			<input type="text" id="ddi" name="ddi" value="55" onchange="changeLink()" onkeyup="changeLink()" style="width: 48px;" maxlength="2" />
+			<input type="text" id="ddd" name="ddd" value="21" onchange="changeLink()" onkeyup="changeLink()" style="width: 48px;" maxlength="2" />
+			<input type="text" id="phone" name="phone" value="" onchange="changeLink()" onkeyup="changeLink()" style="width: 154px;" maxlength="20" />
 			<br />
 			<br />
 			<label for="msg" style="width: 250px; text-align: left; display: inline-block;">Mensagem: </label>
 			<br />
-			<textarea type="text" id="msg" name="msg" onkeyup="changeLink()" style="width: 256px;" rows="8">https://bruno-n-fernandes.github.io/MPSC.PlenoSoft.WhatsApp</textarea>
+			<textarea type="text" id="msg" name="msg" onchange="changeLink()" onkeyup="changeLink()" style="width: 256px;" rows="8">https://bruno-n-fernandes.github.io/MPSC.PlenoSoft.WhatsApp</textarea>
 			<br />
 			<br />
 			Enviar Mensagem para<br />
 			<a id="link" name="link" target="WhatsApp">
 				<span for="qrCode" id="lbLink" name="lbLink"></span>
 				<br />
-				<img id="qrCode" name="qrCode" width="256" height="256" src="https://api.qrserver.com/v1/create-qr-code/?size=256x256&data=https://bruno-n-fernandes.github.io/MPSC.PlenoSoft.WhatsApp" />
+				<img id="qrCode" name="qrCode" width="256" height="256" src="" />
 			</a>
 			<br />
 			<h3>Projeto hospedado no <a href="https://github.com/Bruno-N-Fernandes/MPSC.PlenoSoft.WhatsApp">Git Hub</a></h3>
@@ -55,19 +56,25 @@
 			const qrCode = document.getElementById("qrCode");
 
 			const insert = function insert(main_string, ins_string, pos) {
-				if (typeof(pos) == "undefined") {
+				if (typeof (pos) == "undefined") {
 					pos = 0;
 				}
-				if (typeof(ins_string) == "undefined") {
+				if (typeof (ins_string) == "undefined") {
 					ins_string = '';
 				}
 				return main_string.slice(0, pos) + ins_string + main_string.slice(pos);
 			}
 
+			function init() {
+				qrCode.src = "https://api.qrserver.com/v1/create-qr-code/?size=256x256&data=https://bruno-n-fernandes.github.io/MPSC.PlenoSoft.WhatsApp";
+				link.href = "";
+				lbLink.innerText = "";
+			}
+
 			function changeLink() {
 				let number = txtphone.value.replace(/[^0-9]/gi, "");
 
-				if (number.length == 0) return;
+				if (number.length < 8) return init();
 
 				if (number.length >= 12) {
 					txtddi.value = number.substring(0, 2);
@@ -80,7 +87,7 @@
 				}
 
 				let phone = insert(number, "-", -4);
-				if (number.length == 9) {
+				if (phone.length == 10) {
 					phone = insert(phone, " ", 1);
 				}
 
@@ -90,11 +97,13 @@
 				let fullPhone = `+${ddi} (${ddd}) ${phone}`;
 				let fullNumber = ddi + ddd + number;
 				let mensagem = encodeURIComponent(txtmsg.value.trim());
-				let waUrl = `https://api.whatsapp.com/send?phone=${fullNumber}&text=${mensagem}`;
 
+				let waUrl = `https://api.whatsapp.com/send?phone=${fullNumber}&text=${mensagem}`;
+				let qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=256x256&data=${encodeURIComponent(waUrl)}`;
+
+				qrCode.src = qrUrl;
 				link.href = waUrl;
 				lbLink.innerText = fullPhone;
-				qrCode.src = `https://api.qrserver.com/v1/create-qr-code/?size=256x256&data=${encodeURIComponent(waUrl)}`;
 			}
 
 			const queryString = new URLSearchParams(window.location.search);
