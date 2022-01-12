@@ -84,17 +84,16 @@
 					phone = insert(phone, " ", 1);
 				}
 
-				let mensagem = encodeURIComponent(txtmsg.value.trim());
+				txtphone.value = phone;
 				let ddi = txtddi.value.trim();
 				let ddd = txtddd.value.trim();
 				let fullPhone = `+${ddi} (${ddd}) ${phone}`;
 				let fullNumber = ddi + ddd + number;
-				txtphone.value = phone;
-
+				let mensagem = encodeURIComponent(txtmsg.value.trim());
 				let waUrl = `https://api.whatsapp.com/send?phone=${fullNumber}&text=${mensagem}`;
+
 				link.href = waUrl;
 				lbLink.innerText = fullPhone;
-
 				qrCode.src = `https://api.qrserver.com/v1/create-qr-code/?size=256x256&data=${encodeURIComponent(waUrl)}`;
 			}
 
