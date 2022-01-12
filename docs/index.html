@@ -1,4 +1,5 @@
 <html>
+
 	<head>
 		<title>WhatsApp Self Link Generator</title>
 		<meta name="description" content="Gerador de link para enviar mensagem para você mesmo">
@@ -10,14 +11,13 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	</head>
-	<body style="background-color: rgb(226, 238, 224)">
+
+	<body>
 		<div align="center">
 			<span style="width: 256px; text-align: center; display: inline-block;">
-				<h2>Whats App Sender</h2>
-				Envie mensagens para qualquer número do Whats App, inclusive para o seu próprio número!
-					<br />
-				<br />
-				E o melhor, você não precisa que o número esteja em sua agenda!
+				<b>Whats App Sender</b>
+				<br />Envie mensagens para qualquer número do Whats App, inclusive para o seu próprio número!
+				<br /> E o melhor, você não precisa que o número esteja em sua agenda!
 			</span>
 			<br />
 			<br />
@@ -30,20 +30,18 @@
 			<input type="text" id="phone" name="phone" value="" onchange="changeLink()" onkeyup="changeLink()" style="width: 154px;" maxlength="20" />
 			<br />
 			<br />
-			<label for="msg" style="width: 250px; text-align: left; display: inline-block;">Mensagem: </label>
+			<label for="msg" style="width: 250px; text-align: left; display: inline-block;">Digite o template da mensagem: </label>
 			<br />
-			<textarea type="text" id="msg" name="msg" onchange="changeLink()" onkeyup="changeLink()" style="width: 256px;" rows="8">https://bruno-n-fernandes.github.io/MPSC.PlenoSoft.WhatsApp</textarea>
+			<textarea type="text" id="msg" name="msg" onchange="changeLink()" onkeyup="changeLink()" style="width: 256px;" rows="6">https://bruno-n-fernandes.github.io/MPSC.PlenoSoft.WhatsApp</textarea>
 			<br />
 			<br />
-			Enviar Mensagem para<br />
 			<a id="link" name="link" target="WhatsApp">
 				<span for="qrCode" id="lbLink" name="lbLink"></span>
 				<br />
 				<img id="qrCode" name="qrCode" width="256" height="256" src="" />
 			</a>
 			<br />
-			<h3>Projeto hospedado no <a href="https://github.com/Bruno-N-Fernandes/MPSC.PlenoSoft.WhatsApp">Git Hub</a></h3>
-			<h4>Desenvolvido por <a href="https://instagram.com/HipnoseDivertida">@HipnoseDivertida</a></h4>
+			<h3>Desenvolvido por<br /><a href="https://loja.mercadopleno.com.br/">Mercado Pleno</a></h3>
 		</div>
 		<script type="text/javascript">
 
@@ -113,4 +111,5 @@
 			changeLink();
 		</script>
 	</body>
+
 </html>
