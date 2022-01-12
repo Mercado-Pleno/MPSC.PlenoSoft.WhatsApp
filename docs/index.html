@@ -94,6 +94,10 @@
 				qrCode.src = `https://api.qrserver.com/v1/create-qr-code/?size=256x256&data=${encodeURIComponent(waUrl)}`;
 			}
 
+			const queryString = new URLSearchParams(window.location.search);
+			txtphone.value = queryString.get("phone");
+			txtmsg.value = queryString.has("msg") ? queryString.get("msg") : txtmsg.value;
+
 			changeLink();
 		</script>
 	</body>
